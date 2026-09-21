@@ -1,5 +1,4 @@
 const Header = (props) => {
-  console.log(`Header props: ${props.course} `)
 
   return (
     <div>
@@ -9,7 +8,6 @@ const Header = (props) => {
 }
 
 const Content = (props) => {
-  console.log(`Content props 1: ${props.parts[0].name} ${props.parts[0].exercises} `)
 
   return (
     <div>
