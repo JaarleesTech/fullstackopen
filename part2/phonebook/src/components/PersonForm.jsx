@@ -6,8 +6,6 @@ const PersonForm = ({
     addPerson
 }) => {
 
-    
-
   return (
     <div>
         <form onSubmit={addPerson}>
