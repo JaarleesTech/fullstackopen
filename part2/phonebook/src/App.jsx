@@ -3,12 +3,24 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  const [notification, setNotification] = useState({
+    message: '',
+    type: ''
+  })
+
+   const showNotification = (message, type) => {
+      setNotification({ message, type })
+      setTimeout(() => {
+        setNotification({ message: '', type: ''})
+      }, 5000)
+    }
 
     useEffect(() => {
     personService
@@ -49,17 +61,19 @@ const App = () => {
 
           setNewName('')
           setNewNumber('')
+
+          showNotification(`${returnedPerson.name}'s number was updated`, 'success')
+      }) 
+      .catch((error) => {
+        showNotification(`${existingPerson.name} has already been removed from the server`, 'error')
       })
 
       return
     }
 
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(person => person.id)) : 0
     const newPerson = {
       name: newName,
-      number: newNumber,
-      id: maxId + 1
+      number: newNumber
     }
 
     personService
@@ -68,6 +82,11 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+
+        showNotification(`${returnedPerson.name} was added to the phonebook`, 'success')
+      })
+      .catch(error => {
+        showNotification('Adding the person failed', 'error')
       })
   }
 
@@ -77,6 +96,11 @@ const App = () => {
         .removePerson(id)
         .then(() => {
           setPersons(persons.filter(person => person.id !== id))
+
+          showNotification(`${name} was deleted from the phonebook`, 'success')
+        })
+        .catch(error => {
+          showNotification(`deleting ${name} failed`, 'error')
         })
     }
   }
@@ -96,6 +120,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message = {notification.message} type = {notification.type} />
       <Filter search = {search} handleSearch = {handleSearch} />
       <h3>Add a new</h3>
       <PersonForm 
