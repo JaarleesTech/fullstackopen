@@ -1,11 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
-const cors = require('cors')
+//const cors = require('cors')
 
 const app = express()
 
-app.use(cors())
+// CORS is disabled because the backend now serves the frontend from the same origin
+//app.use(cors())   
 app.use(express.json())
+app.use(express.static('dist'))
 
 morgan.token('post-data', (request) => {
     if(request.method === 'POST') {
@@ -117,7 +119,7 @@ app.post('/api/persons', (request, response) => {
 })
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
