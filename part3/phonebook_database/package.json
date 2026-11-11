@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "lint": "eslint .",
     "build:ui": "shx rm -rf dist && cd ../../part2/phonebook && npm install && npm run build && shx cp -r dist ../../part3/phonebook_database",
     "deploy:full": "npm run build:ui && cd ../.. && git add . && git commit -m uibuild && git push"
   },
@@ -20,6 +21,10 @@
     "morgan": "^1.12.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
     "shx": "^0.4.0"
   }
 }
