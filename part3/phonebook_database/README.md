@@ -6,4 +6,5 @@ I created this directory to preserve the previous phonebook_backend implementati
 
 This version is also deployed on Render and is live at the link below.
 
-Live application: 
+Live application: https://phonebook-database-0xe8.onrender.com/
+Persons List: https://phonebook-database-0xe8.onrender.com/api/persons
