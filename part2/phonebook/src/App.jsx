@@ -86,7 +86,10 @@ const App = () => {
         showNotification(`${returnedPerson.name} was added to the phonebook`, 'success')
       })
       .catch(error => {
-        showNotification('Adding the person failed', 'error')
+        console.log(error.response.data.error)
+        showNotification(
+          error.response?.data?.error || 'Adding the person failed', 
+          'error')
       })
   }
 

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "build:ui": "shx rm -rf dist && cd ../../part2/phonebook && npm run build && shx cp -r dist ../../part3/phonebook_backend",
+    "build:ui": "shx rm -rf dist && cd ../../part2/phonebook && npm run build && shx cp -r dist ../../part3/phonebook_database",
     "deploy:full": "npm run build:ui && cd ../.. && git add . && git commit -m uibuild && git push"
   },
   "dependencies": {
